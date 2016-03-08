@@ -1,11 +1,13 @@
-package com.brilgo.meanbook.spring.api.rest.wrapper;
+package com.brilgo.meanbook.spring.api.rest.response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersWrapper {
+import com.brilgo.meanbook.spring.model.User;
+
+public class UsersListResponse {
 	
-	public UsersWrapper() {
+	public UsersListResponse() {
 	}
 	
 	private List<User> users = new ArrayList<>();
