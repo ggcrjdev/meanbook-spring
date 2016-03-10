@@ -29,7 +29,7 @@ public class PostsRestController {
 
 	@RequestMapping(value = "/list", method = GET)
 	public PostsListResponse list(HttpSession session) {
-		String author = this.identityManager.isLoggedIn(session) ? this.identityManager.getLoggedInUser(session).getUsername() : null;
+		String author = this.identityManager.isLoggedIn(session) ? this.identityManager.getLoggedInUser(session).getUsername() : "ggc";
 		PostsListResponse response = new PostsListResponse();
 		response.getPosts().addAll(this.postService.listPosts(author));
 		return response;
