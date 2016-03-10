@@ -1,6 +1,6 @@
 package com.brilgo.meanbook.spring.api.rest.request;
 
-public class UsersLoginRequest {
+public class UsernameRequest {
 
 	private String username;
 

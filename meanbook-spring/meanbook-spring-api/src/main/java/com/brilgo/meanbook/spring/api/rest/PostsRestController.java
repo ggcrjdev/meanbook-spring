@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,9 +28,9 @@ public class PostsRestController {
 	
 	@Autowired private PostService postService;
 
-	@RequestMapping(value = "/list", method = GET)
-	public PostsListResponse list(HttpSession session) {
-		String author = this.identityManager.isLoggedIn(session) ? this.identityManager.getLoggedInUser(session).getUsername() : "ggc";
+	@RequestMapping(value = "/list/{username}", method = GET)
+	public PostsListResponse list(HttpSession session, @PathVariable("username") String username) {
+		String author = this.identityManager.isLoggedIn(session) ? this.identityManager.getLoggedInUser(session).getUsername() : username;
 		PostsListResponse response = new PostsListResponse();
 		response.getPosts().addAll(this.postService.listPosts(author));
 		return response;

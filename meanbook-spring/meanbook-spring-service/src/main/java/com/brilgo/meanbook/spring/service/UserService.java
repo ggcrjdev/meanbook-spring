@@ -25,7 +25,8 @@ public class UserService {
 		return user;
 	}
 
-	public void logout(User user) {
+	public void logout(String username) {
+		User user = new User(username, username);
 		this.onlineUserManager.removeUser(user);
 	}
 }
