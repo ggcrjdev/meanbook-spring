@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.brilgo.meanbook.spring.model.User;
 
 @Service
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class UserService {
 
 	@Autowired private OnlineUserManager onlineUserManager;
@@ -20,12 +20,12 @@ public class UserService {
 	}
 
 	public User login(User user) {
+		user.setId(user.getUsername());
 		this.onlineUserManager.addUser(user);
 		return user;
 	}
 
-	public void logout() {
-		User currentUser = null;
-		this.onlineUserManager.removeUser(currentUser);
+	public void logout(User user) {
+		this.onlineUserManager.removeUser(user);
 	}
 }

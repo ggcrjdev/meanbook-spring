@@ -17,6 +17,7 @@
 	<modules>
 		<module>meanbook-spring-web</module>
 		<module>meanbook-spring-api</module>
+		<module>meanbook-spring-service</module>
 	</modules>
 
 	<prerequisites>
@@ -26,7 +27,7 @@
 		<servlet.version>2.5</servlet.version>
 		<jstl.version>1.2</jstl.version>
 
-		<spring.version>4.1.3.RELEASE</spring.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
 		<mongodb-driver.version>3.2.2</mongodb-driver.version>
 		<joda-time.version>2.2</joda-time.version>
 	</properties>
@@ -40,6 +41,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<!-- Dependencias do proprio projeto. -->
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>meanbook-spring-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>meanbook-spring-api</artifactId>
@@ -82,6 +88,11 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-websocket</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>

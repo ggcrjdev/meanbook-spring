@@ -11,7 +11,7 @@ import com.brilgo.meanbook.spring.model.Post;
 import com.brilgo.meanbook.spring.repository.PostRepository;
 
 @Service
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PostService {
 
 	@Autowired private PostRepository postRepository;

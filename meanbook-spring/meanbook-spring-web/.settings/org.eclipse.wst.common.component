@@ -7,6 +7,9 @@
         <dependent-module archiveName="meanbook-spring-api-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/meanbook-spring-api/meanbook-spring-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="meanbook-spring-service-1.0.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/meanbook-spring-service/meanbook-spring-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="meanbook-spring-web"/>
         <property name="java-output-path" value="/meanbook-spring-web/target/classes"/>
     </wb-module>

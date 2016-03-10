@@ -4,6 +4,9 @@ public class UsersCurrentResponse {
 	
 	private boolean authenticated;
 	private String username;
+	
+	public UsersCurrentResponse() {
+	}
 
 	public UsersCurrentResponse(boolean authenticated, String username) {
 		super();

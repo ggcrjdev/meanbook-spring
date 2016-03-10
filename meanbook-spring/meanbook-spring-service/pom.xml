@@ -7,27 +7,33 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	
-	<artifactId>meanbook-spring-api</artifactId>
-	<name>MeanBook - Modulo API</name>
-	<description>MeanBook - Modulo API</description>
+	<artifactId>meanbook-spring-service</artifactId>
+	<name>MeanBook - Modulo Service</name>
+	<description>MeanBook - Modulo Service</description>
 	
 	<dependencies>
-		<!-- Dependencias do proprio projeto. -->
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>meanbook-spring-service</artifactId>
-		</dependency>
-		
 		<!-- Dependencias para o Spring Framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
 		</dependency>
 
-		<!-- Especificações Java EE -->
+		<!-- Dependencias para banco de dados. -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver</artifactId>
 		</dependency>
 	</dependencies>
 

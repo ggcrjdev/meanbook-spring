@@ -8,6 +8,9 @@ public class User {
 	private String username;
 	private Date loginDate;
 
+	public User() {
+	}
+
 	public User(String id, String username) {
 		super();
 		this.id = id;
