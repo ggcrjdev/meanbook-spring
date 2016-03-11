@@ -29,14 +29,11 @@
 			<artifactId>spring-websocket</artifactId>
 		</dependency>
 
-		<!-- Especificações Java EE -->
+		<!-- Especificações Java EE providas -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>jstl-impl</artifactId>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

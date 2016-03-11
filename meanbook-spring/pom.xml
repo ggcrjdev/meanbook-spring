@@ -24,6 +24,8 @@
 		<maven>3.1.1</maven>
 	</prerequisites>
 	<properties>
+		<javaee.version>7.0</javaee.version>
+		<spec-jboss-javaee.version>1.0.3.Final</spec-jboss-javaee.version>
 		<servlet.version>2.5</servlet.version>
 		<jstl.version>1.2</jstl.version>
 
@@ -52,31 +54,13 @@
 				<version>${project.version}</version>
 			</dependency>
 
-			<!-- Especificações Java EE -->
+			<!-- Especificações Java EE providas -->
 			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<version>${servlet.version}</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.glassfish.web</groupId>
-				<artifactId>jstl-impl</artifactId>
-				<version>${jstl.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>javax.servlet</groupId>
-						<artifactId>servlet-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>javax.servlet.jsp</groupId>
-						<artifactId>jsp-api</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>javax.el</groupId>
-						<artifactId>el-api</artifactId>
-					</exclusion>
-				</exclusions>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-${javaee.version}</artifactId>
+				<version>${spec-jboss-javaee.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
 			</dependency>
 
 			<!-- Dependencias para o Spring Framework -->
@@ -143,6 +127,12 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.dbunit</groupId>
