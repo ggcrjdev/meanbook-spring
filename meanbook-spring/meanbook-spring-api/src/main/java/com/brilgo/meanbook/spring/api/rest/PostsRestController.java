@@ -3,6 +3,8 @@ package com.brilgo.meanbook.spring.api.rest;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import com.brilgo.meanbook.spring.api.rest.request.PostsLikeRequest;
 import com.brilgo.meanbook.spring.api.rest.response.PostsAddResponse;
 import com.brilgo.meanbook.spring.api.rest.response.PostsLikeResponse;
 import com.brilgo.meanbook.spring.api.rest.response.PostsListResponse;
+import com.brilgo.meanbook.spring.model.Post;
 import com.brilgo.meanbook.spring.service.PostService;
 
 @RestController
@@ -30,19 +33,18 @@ public class PostsRestController {
 
 	@RequestMapping(value = "/list/{username}", method = GET)
 	public PostsListResponse list(HttpSession session, @PathVariable("username") String username) {
-		String author = this.identityManager.isLoggedIn(session) ? this.identityManager.getLoggedInUser(session).getUsername() : username;
-		PostsListResponse response = new PostsListResponse();
-		response.getPosts().addAll(this.postService.listPosts(author));
-		return response;
+		String author = this.identityManager.isLoggedIn(session) ? this.identityManager.getLoggedInUser(session).username : username;
+		List<Post> posts = this.postService.listPosts(author);
+		return new PostsListResponse(posts);
 	}
 	
 	@RequestMapping(value = "/add", method = POST)
 	public PostsAddResponse add(@RequestBody PostsAddRequest request) {
-		return new PostsAddResponse();
+		return PostsAddResponse.nullObject();
 	}
 	
 	@RequestMapping(value = "/like/{id}", method = POST)
 	public PostsLikeResponse like(@RequestParam(value = "id") String postId, @RequestBody PostsLikeRequest request) {
-		return new PostsLikeResponse();
+		return PostsLikeResponse.nullObject();
 	}
 }

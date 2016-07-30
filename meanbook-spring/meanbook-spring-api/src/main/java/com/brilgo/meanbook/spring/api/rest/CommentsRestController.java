@@ -17,11 +17,11 @@ public class CommentsRestController {
 	
 	@RequestMapping(value = "/add", method = POST)
 	public CommentsAddResponse add(@RequestBody CommentsAddRequest request) {
-		return new CommentsAddResponse();
+		return CommentsAddResponse.nullObject();
 	}
 	
 	@RequestMapping(value = "/like", method = POST)
 	public CommentsLikeResponse like(@RequestBody CommentsLikeRequest request) {
-		return new CommentsLikeResponse();
+		return CommentsLikeResponse.nullObject();
 	}
 }

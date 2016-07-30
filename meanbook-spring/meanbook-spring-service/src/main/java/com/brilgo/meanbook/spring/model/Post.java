@@ -1,59 +1,34 @@
 package com.brilgo.meanbook.spring.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 public class Post {
-
-	private String id;
-	private String author;
-	private Date timestamp;
-	private String text;
-	private Integer likes;
-	
-	private List<Comment> comments = new ArrayList<>();
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
+	public final String id;
+	public final String author;
+	public final Date timestamp;
+	public final String text;
+	public final Integer likes;
+	public final List<Comment> comments;
+	public final boolean hasComments;
+	public final int commentsCount;
+	private Post(String id, String author, Date timestamp, String text, Integer likes, List<Comment> comments) {
 		this.id = id;
-	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
 		this.author = author;
-	}
-	public Date getTimestamp() {
-		return timestamp;
-	}
-	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
-	}
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
 		this.text = text;
-	}
-	public Integer getLikes() {
-		return likes;
-	}
-	public void setLikes(Integer likes) {
 		this.likes = likes;
+		this.comments = Collections.unmodifiableList(comments);
+		this.commentsCount = comments.size();
+		this.hasComments = !comments.isEmpty();
 	}
-	public List<Comment> getComments() {
-		return comments;
+	public Post(String id, String author, Date timestamp, String text, Integer likes) {
+		this(id, author, timestamp, text, likes, new ArrayList<Comment>(0));
 	}
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
-	public Integer getCommentsCount() {
-		return this.comments.size();
-	}
-	public boolean isHasComments() {
-		return !this.comments.isEmpty();
+	
+	public Post withCommets(List<Comment> comments) {
+		return new Post(id, author, timestamp, text, likes, comments);
 	}
 }

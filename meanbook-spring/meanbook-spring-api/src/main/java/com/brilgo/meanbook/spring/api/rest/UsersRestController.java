@@ -3,6 +3,8 @@ package com.brilgo.meanbook.spring.api.rest;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,25 +30,22 @@ public class UsersRestController {
 
 	@RequestMapping(value = "/list", method = GET)
 	public UsersListResponse list() {
-		UsersListResponse users = new UsersListResponse();
-		users.getUsers().addAll(this.userService.getOnlineUsers());
-		return users;
+		List<User> users = this.userService.getOnlineUsers();
+		return new UsersListResponse(users);
 	}
 	
 	@RequestMapping(value = "/current", method = POST)
 	public UsersCurrentResponse getCurrent(HttpSession session) {
-		UsersCurrentResponse response = new UsersCurrentResponse();
 		if (this.identityManager.isLoggedIn(session)) {
-			response.setAuthenticated(true);
-			response.setUsername(this.identityManager.getLoggedInUser(session).getUsername());
+			return new UsersCurrentResponse(true, this.identityManager.getLoggedInUser(session).username);
+		} else {
+			return UsersCurrentResponse.nullObject();
 		}
-		return response;
 	}
 	
 	@RequestMapping(value = "/login", method = POST)
 	public User login(HttpSession session, @RequestBody UsernameRequest request) {
-		User user = new User();
-		user.setUsername(request.getUsername());
+		User user = new User(request.username);
 		User loggedUser = this.userService.login(user);
 		this.identityManager.putUser(session, user);
 		return loggedUser;
@@ -55,7 +54,7 @@ public class UsersRestController {
 	@RequestMapping(value = "/logout", method = POST)
 	public UsersLogoutResponse logout(HttpSession session, @RequestBody UsernameRequest request) {
 		try {
-			this.userService.logout(request.getUsername());
+			this.userService.logout(request.username);
 			session.invalidate();
 			return new UsersLogoutResponse(true);
 		} catch (Exception e) {

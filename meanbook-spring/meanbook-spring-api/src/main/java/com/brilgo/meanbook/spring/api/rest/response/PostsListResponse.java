@@ -1,21 +1,20 @@
 package com.brilgo.meanbook.spring.api.rest.response;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.brilgo.meanbook.spring.model.Post;
 
 public class PostsListResponse {
-
-	private List<Post> posts = new ArrayList<>();
+	public final List<Post> posts;
+	public final int postsCount;
+	public PostsListResponse(List<Post> posts) {
+		this.posts = Collections.unmodifiableList(posts);
+		this.postsCount = posts.size();
+	}
 	
-	public List<Post> getPosts() {
-		return posts;
-	}
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-	public Integer getPostsCount() {
-		return this.posts.size();
+	public static PostsListResponse nullObject() {
+		return new PostsListResponse(new ArrayList<Post>(0));
 	}
 }

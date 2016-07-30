@@ -3,37 +3,16 @@ package com.brilgo.meanbook.spring.model;
 import java.util.Date;
 
 public class User {
-	
-	private String id;
-	private String username;
-	private Date loginDate;
-
-	public User() {
-	}
-
-	public User(String id, String username) {
-		super();
+	public final String id;
+	public final String username;
+	public final Date loginDate;
+	private User(String id, String username, Date loginDate) {
 		this.id = id;
 		this.username = username;
-	}
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public Date getLoginDate() {
-		return loginDate;
-	}
-	public void setLoginDate(Date loginDate) {
 		this.loginDate = loginDate;
+	}
+	public User(String username) {
+		this(username, username, new Date(0L));
 	}
 
 	@Override
@@ -53,6 +32,10 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		return equalsIdField(other);
+	}
+	
+	private boolean equalsIdField(User other) {
 		if (id == null) {
 			if (other.id != null)
 				return false;

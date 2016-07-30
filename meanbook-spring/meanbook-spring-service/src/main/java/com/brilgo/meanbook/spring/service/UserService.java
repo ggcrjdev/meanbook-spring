@@ -20,13 +20,12 @@ public class UserService {
 	}
 
 	public User login(User user) {
-		user.setId(user.getUsername());
 		this.onlineUserManager.addUser(user);
 		return user;
 	}
 
 	public void logout(String username) {
-		User user = new User(username, username);
+		User user = new User(username);
 		this.onlineUserManager.removeUser(user);
 	}
 }

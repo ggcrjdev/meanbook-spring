@@ -1,15 +1,12 @@
 package com.brilgo.meanbook.spring.api.rest.request;
 
 public class UsernameRequest {
-
-	private String username;
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
+	public final String username;
+	public UsernameRequest(String username) {
 		this.username = username;
 	}
 	
+	public UsernameRequest() {
+		username = null;
+	}
 }

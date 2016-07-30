@@ -29,13 +29,8 @@ public class PostRepository {
 		List<Post> posts = new ArrayList<>();
 		while (cursor.hasNext()) {
 			Document doc = cursor.next();
-			Post post = new Post();
-			post.setId(doc.getObjectId("_id").toHexString());
-			post.setAuthor(doc.getString("by"));
-			post.setLikes(doc.getInteger("likes"));
-			post.setText(doc.getString("content"));
-			post.setTimestamp(doc.getDate("creationDate"));
-			posts.add(post);
+			posts.add(new Post(doc.getObjectId("_id").toHexString(), doc.getString("by"), 
+					doc.getDate("creationDate"), doc.getString("content"), doc.getInteger("likes")));
 		}
 		return posts;
 	}
