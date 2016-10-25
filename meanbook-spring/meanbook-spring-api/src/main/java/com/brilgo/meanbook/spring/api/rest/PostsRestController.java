@@ -31,10 +31,12 @@ public class PostsRestController {
 	
 	@Autowired private PostService postService;
 
-	@RequestMapping(value = "/list/{username}", method = GET)
-	public PostsListResponse list(HttpSession session, @PathVariable("username") String username) {
-		String author = this.identityManager.isLoggedIn(session) ? this.identityManager.getLoggedInUser(session).username : username;
-		List<Post> posts = this.postService.listPosts(author);
+	@RequestMapping(value = "/list/{username}/{pageNumber}", method = GET)
+	public PostsListResponse list(HttpSession session, @PathVariable("username") String username,
+			@PathVariable("pageNumber") Integer pageNumber) {
+		String author = this.identityManager.isLoggedIn(session) ?
+				this.identityManager.getLoggedInUser(session).username : username;
+		List<Post> posts = this.postService.listPosts(author, pageNumber);
 		return new PostsListResponse(posts);
 	}
 	

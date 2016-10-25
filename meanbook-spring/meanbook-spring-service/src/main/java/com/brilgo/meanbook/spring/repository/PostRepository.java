@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.brilgo.meanbook.spring.model.Post;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
@@ -20,12 +21,14 @@ public class PostRepository {
 	
 	@Autowired private MeanBookRepositoryManager repositoryManager;
 	
-	public List<Post> listByAuthor(String author) {
+	public List<Post> listByAuthor(String author, Integer pageNumber) {
 		this.repositoryManager.connect();
 		MongoCollection<Document> collection = this.repositoryManager.getCollection(COLLECTION_NAME);
-		MongoCursor<Document> cursor = collection.find(Filters.eq("by", author))
-				.sort(Sorts.descending("creationDate")).iterator();
-		
+		FindIterable<Document> findIterable = collection.find(Filters.eq("by", author))
+				.sort(Sorts.descending("creationDate"));
+		findIterable = repositoryManager.includePaginationOptions(findIterable, pageNumber);
+		MongoCursor<Document> cursor = findIterable.iterator();
+
 		List<Post> posts = new ArrayList<>();
 		while (cursor.hasNext()) {
 			Document doc = cursor.next();

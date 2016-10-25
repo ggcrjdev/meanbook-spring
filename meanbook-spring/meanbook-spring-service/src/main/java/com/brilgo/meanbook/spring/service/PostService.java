@@ -16,7 +16,7 @@ public class PostService {
 
 	@Autowired private PostRepository postRepository;
 	
-	public List<Post> listPosts(String author) {
-		return this.postRepository.listByAuthor(author);
+	public List<Post> listPosts(String author, Integer pageNumber) {
+		return this.postRepository.listByAuthor(author, pageNumber);
 	}
 }

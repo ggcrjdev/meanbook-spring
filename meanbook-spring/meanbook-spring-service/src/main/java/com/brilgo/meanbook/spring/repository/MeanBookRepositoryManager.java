@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -16,6 +17,7 @@ public class MeanBookRepositoryManager {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MeanBookRepositoryManager.class);
 
 	private static final int MONGODB_DEFAULT_PORT = 27017;
+	private static final int MONGODB_DEFAULT_PAGE_SIZE = 20;
 	
 	private MongoClient connection;
 	private MongoDatabase database;
@@ -55,5 +57,10 @@ public class MeanBookRepositoryManager {
 	
 	public void insertDocument(String collectionName, Document doc) {
 		this.database.getCollection(collectionName).insertOne(doc);
+	}
+	
+	public <T> FindIterable<T> includePaginationOptions(FindIterable<T> findIterable, Integer pageNumber) {
+		return findIterable.skip(MONGODB_DEFAULT_PAGE_SIZE * (pageNumber - 1))
+				.limit(MONGODB_DEFAULT_PAGE_SIZE);
 	}
 }
